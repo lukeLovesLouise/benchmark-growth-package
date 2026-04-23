@@ -35,9 +35,7 @@
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { font-size: 16px; scroll-behavior: smooth; }
-    html, body { height: auto; min-height: 100%; }
-    body { font-family: var(--font-body); color: var(--gray-700); background: var(--cream-light); -webkit-font-smoothing: antialiased; line-height: 1.6; overflow-x: hidden; -webkit-overflow-scrolling: touch; }
-    body.modal-open { overflow: hidden; position: fixed; width: 100%; }
+    body { font-family: var(--font-body); color: var(--gray-700); background: var(--cream-light); -webkit-font-smoothing: antialiased; line-height: 1.6; }
 
     /* EMPHASIS STYLES */
     .highlight {
@@ -554,18 +552,11 @@
       aObs.observe(el);
     });
 
-    // Booking modal - mobile-safe scroll lock
-    let scrollY = 0;
+    // Booking modal - simple, no scroll lock tricks
     function openModal() {
-      scrollY = window.scrollY;
-      document.body.classList.add('modal-open');
-      document.body.style.top = -scrollY + 'px';
       document.getElementById('modal').classList.add('active');
     }
     function closeModal() {
-      document.body.classList.remove('modal-open');
-      document.body.style.top = '';
-      window.scrollTo(0, scrollY);
       document.getElementById('modal').classList.remove('active');
     }
     document.getElementById('modal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
