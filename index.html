@@ -504,11 +504,29 @@
     </div>
   </div>
 
+  <script src="https://unpkg.com/rough-notation@0.5.1/lib/rough-notation.iife.js"></script>
   <script>
     function openModal() { document.getElementById('modal').classList.add('active'); }
     function closeModal() { document.getElementById('modal').classList.remove('active'); }
     document.getElementById('modal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
     document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+
+    // Annotations - all fire on load, no scroll observers
+    var cfg = {
+      underline:  { type: 'underline', color: '#9A0002', strokeWidth: 3, padding: 2 },
+      circle:     { type: 'circle', color: '#9A0002', strokeWidth: 2, padding: 8 },
+      bracket:    { type: 'bracket', color: '#9A0002', strokeWidth: 2, padding: 6, brackets: ['left','right'] },
+      box:        { type: 'box', color: '#9A0002', strokeWidth: 2, padding: 4 },
+    };
+    window.addEventListener('load', function() {
+      document.querySelectorAll('[data-annotate]').forEach(function(el) {
+        var c = cfg[el.dataset.annotate];
+        if (!c) return;
+        var opts = Object.assign({}, c);
+        if (el.dataset.annotateColor) opts.color = el.dataset.annotateColor;
+        RoughNotation.annotate(el, opts).show();
+      });
+    });
   </script>
 </body>
 </html>
