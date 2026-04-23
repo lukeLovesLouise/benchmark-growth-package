@@ -37,6 +37,18 @@
     html { font-size: 16px; scroll-behavior: smooth; }
     body { font-family: var(--font-body); color: var(--gray-700); background: var(--cream-light); -webkit-font-smoothing: antialiased; line-height: 1.6; overflow-x: hidden; }
 
+    /* EMPHASIS STYLES */
+    .highlight {
+      background: linear-gradient(to top, var(--cream-dark) 40%, transparent 40%);
+      padding: 0 4px; margin: 0 -4px;
+      display: inline;
+    }
+    .highlight-red {
+      background: linear-gradient(to top, rgba(154,0,2,0.12) 40%, transparent 40%);
+      padding: 0 4px; margin: 0 -4px;
+      display: inline;
+    }
+
     .grain { position: relative; }
     .grain::after {
       content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0.04; z-index: 1;
@@ -62,21 +74,35 @@
     /* NAV */
     .nav {
       position: sticky; top: 0; z-index: 50;
-      padding: 14px 24px;
+      padding: 0 28px;
+      height: 64px;
       display: flex; align-items: center; justify-content: space-between;
-      background: rgba(247,242,237,0.9);
+      background: rgba(247,242,237,0.92);
       backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(10,10,10,0.04);
+      border-bottom: 1px solid rgba(10,10,10,0.05);
     }
-    .nav-logo { text-decoration: none; }
-    .nav-logo img { height: 44px; width: auto; }
+    .nav-logo { text-decoration: none; display: flex; align-items: center; height: 100%; }
+    .nav-logo img { height: 28px; width: auto; }
     .nav-cta {
-      font-family: var(--font-display); font-size: 13px; padding: 12px 28px;
+      font-family: var(--font-display); font-size: 12px; padding: 10px 22px;
       background: var(--red); color: var(--cream); border-radius: 2px;
       text-decoration: none; text-transform: uppercase; letter-spacing: 0.08em;
       transition: all 0.25s var(--ease); border: none; cursor: pointer;
     }
     .nav-cta:hover { background: var(--red-hover); transform: translateY(-2px); box-shadow: var(--red-glow); }
+    @media (min-width: 768px) {
+      .nav { padding: 0 40px; height: 72px; }
+      .nav-logo img { height: 34px; }
+      .nav-cta { font-size: 13px; padding: 12px 28px; }
+    }
+
+    /* CTA PULSE - subtle glow animation for primary CTAs */
+    @keyframes cta-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(154,0,2,0); }
+      50% { box-shadow: 0 0 0 8px rgba(154,0,2,0.08); }
+    }
+    .btn-primary.pulse { animation: cta-pulse 3s var(--ease) infinite; }
+    .btn-primary.pulse:hover { animation: none; box-shadow: var(--red-glow); }
 
     /* HERO */
     .hero {
@@ -339,7 +365,7 @@
     <svg class="hero-watermark" viewBox="0 0 600 750" fill="var(--cream-dark)"><use href="#d"/></svg>
     <div class="wrap" style="position:relative;z-index:2;">
       <div class="hero-kicker reveal"><svg viewBox="0 0 600 750"><use href="#d"/></svg> Limited monthly roster</div>
-      <h1 class="reveal reveal-delay-1">3 VIDEOS. 1 AD.<br><em>ONLY $500.</em></h1>
+      <h1 class="reveal reveal-delay-1">3 VIDEOS. 1 AD.<br><em><span data-annotate="underline">ONLY $500.</span></em></h1>
       <p class="hero-sub reveal reveal-delay-2">CINEMATIC CONTENT, BUILT TO CONVERT.</p>
       <p class="hero-lead reveal reveal-delay-2">Professional video production for businesses ready to grow. One monthly package. Zero guesswork. We shoot, edit, and run your ads.</p>
       <div class="hero-ctas reveal reveal-delay-3">
@@ -353,8 +379,8 @@
   <!-- PROBLEM -->
   <section class="problem">
     <div class="wrap">
-      <h2 class="reveal">YOUR COMPETITORS LOOK BETTER ONLINE. <em>YOUR CUSTOMERS NOTICE.</em></h2>
-      <p class="reveal reveal-delay-1">You know your business deserves better content. But hiring a production company feels like something only big brands do. So you keep doing it yourself, posting when you can, and wondering why your online presence does not match the quality of what you actually do.</p>
+      <h2 class="reveal">YOUR COMPETITORS LOOK BETTER ONLINE. <em><span data-annotate="bracket">YOUR CUSTOMERS NOTICE.</span></em></h2>
+      <p class="reveal reveal-delay-1">You know your business deserves better content. But hiring a production company feels like something only big brands do. So you keep doing it yourself, posting when you can, and wondering why your online presence does not match <span class="highlight">the quality of what you actually do.</span></p>
       <ul class="problem-list">
         <li class="reveal"><svg viewBox="0 0 600 750"><use href="#d"/></svg> DIY content is not reflecting the quality of your actual business</li>
         <li class="reveal reveal-delay-1"><svg viewBox="0 0 600 750"><use href="#d"/></svg> You do not know what kind of videos will actually drive leads</li>
@@ -368,7 +394,7 @@
   <section class="package" id="package">
     <div class="wrap-wide">
       <div class="package-kicker reveal">The Growth Package</div>
-      <h2 class="reveal reveal-delay-1">EVERYTHING YOU NEED.<br>NOTHING YOU DON'T.</h2>
+      <h2 class="reveal reveal-delay-1"><span data-annotate="circle">EVERYTHING</span> YOU NEED.<br>NOTHING YOU DON'T.</h2>
       <div class="package-price reveal reveal-delay-2">
         <span class="dollar">$</span><span class="amount">500</span><span class="per">/ month</span>
       </div>
@@ -396,7 +422,7 @@
           </div>
         </div>
         <div class="package-footer">
-          <div class="package-footer-note">Month to month. Cancel anytime. Ad spend billed separately.</div>
+          <div class="package-footer-note">Month to month. <span data-annotate="underline" data-annotate-color="#EFE6DE">Cancel anytime.</span> Ad spend billed separately.</div>
           <button class="btn-primary" onclick="openModal()">Claim Your Spot <span aria-hidden="true">&rarr;</span></button>
         </div>
       </div>
@@ -407,7 +433,7 @@
   <section class="process">
     <div class="wrap-wide">
       <svg class="section-mark reveal" viewBox="0 0 600 750" fill="var(--cream-dark)"><use href="#d"/></svg>
-      <h2 class="reveal">THREE STEPS. <em>THAT'S IT.</em></h2>
+      <h2 class="reveal">THREE STEPS. <em><span data-annotate="box">THAT'S IT.</span></em></h2>
       <div class="steps">
         <div class="step reveal">
           <div class="step-num">01</div>
@@ -437,7 +463,7 @@
   <!-- WHO -->
   <section class="who">
     <div class="wrap-wide">
-      <h2 class="reveal">THIS IS FOR YOU <em>IF...</em></h2>
+      <h2 class="reveal">THIS IS FOR YOU <em><span data-annotate="underline">IF...</span></em></h2>
       <div class="who-grid">
         <div class="who-card reveal"><svg viewBox="0 0 600 750"><use href="#d"/></svg><p>You run a business and you are ready to look the part</p></div>
         <div class="who-card reveal reveal-delay-1"><svg viewBox="0 0 600 750"><use href="#d"/></svg><p>You are in Atlanta, North Georgia, or the surrounding area</p></div>
@@ -453,8 +479,8 @@
   <section class="stakes grain">
     <div class="wrap">
       <svg class="section-mark reveal" viewBox="0 0 600 750" fill="rgba(239,230,222,0.15)" style="opacity:1;"><use href="#d"/></svg>
-      <h2 class="reveal">EVERY MONTH WITHOUT PROFESSIONAL CONTENT IS A MONTH YOUR COMPETITORS WIN.</h2>
-      <p class="reveal reveal-delay-1">People judge your business by how it looks online before they ever walk through your door or pick up the phone. Make sure what they see matches what you deliver.</p>
+      <h2 class="reveal">EVERY MONTH WITHOUT PROFESSIONAL CONTENT IS A MONTH <span data-annotate="underline" data-annotate-color="#EFE6DE">YOUR COMPETITORS WIN.</span></h2>
+      <p class="reveal reveal-delay-1">People judge your business by how it looks online <span class="highlight-red">before they ever walk through your door</span> or pick up the phone. Make sure what they see matches what you deliver.</p>
       <button class="btn-primary reveal reveal-delay-2" onclick="openModal()" style="font-size:16px;padding:20px 48px;">Claim Your Spot <span aria-hidden="true">&rarr;</span></button>
     </div>
   </section>
@@ -462,7 +488,10 @@
   <!-- FOOTER -->
   <footer class="footer">
     <div class="wrap">
-      <div class="footer-mark">BENCHMARK</div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:12px;margin-bottom:32px;">
+        <svg viewBox="0 0 600 750" fill="var(--gray-600)" style="width:36px;height:45px;"><use href="#d"/></svg>
+        <img src="design-system/assets/benchmark-logo-text.svg" alt="Benchmark Productions" style="height:40px;width:auto;filter:brightness(0) invert(0.45);">
+      </div>
       <div class="footer-links">
         <a href="https://www.instagram.com/benchmark.productions/">Instagram</a>
         <a href="mailto:lukeh.huebner@gmail.com">Email</a>
@@ -493,12 +522,35 @@
     </div>
   </div>
 
+  <script src="https://unpkg.com/rough-notation@0.5.1/lib/rough-notation.iife.js"></script>
   <script>
     // Scroll reveal
     const obs = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
     }, { threshold: 0.15 });
     document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // Rough Notation annotations - trigger on scroll
+    const annotationConfig = {
+      underline:  { type: 'underline', color: '#9A0002', strokeWidth: 3, padding: 2, multiline: true },
+      circle:     { type: 'circle', color: '#9A0002', strokeWidth: 2, padding: 8, animationDuration: 800 },
+      bracket:    { type: 'bracket', color: '#9A0002', strokeWidth: 2, padding: 6, brackets: ['left','right'] },
+      box:        { type: 'box', color: '#9A0002', strokeWidth: 2, padding: 4, animationDuration: 600 },
+      highlight:  { type: 'highlight', color: 'rgba(221,208,195,0.6)', multiline: true },
+      crossedoff: { type: 'crossed-off', color: '#9A0002', strokeWidth: 2 },
+    };
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.querySelectorAll('[data-annotate]').forEach(el => {
+      const type = el.dataset.annotate;
+      const config = { ...annotationConfig[type] };
+      if (!config || !config.type) return;
+      if (el.dataset.annotateColor) config.color = el.dataset.annotateColor;
+      const annotation = RoughNotation.annotate(el, { ...config, animate: !reduced, animationDuration: config.animationDuration || 600 });
+      const aObs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { annotation.show(); aObs.unobserve(e.target); } });
+      }, { threshold: 0.5 });
+      aObs.observe(el);
+    });
 
     // Booking modal
     function openModal() {
