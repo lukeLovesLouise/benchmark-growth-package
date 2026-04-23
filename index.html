@@ -277,22 +277,18 @@
     /* BOOKING MODAL */
     .modal-overlay {
       position: fixed; inset: 0; z-index: 1000;
-      background: rgba(10,10,10,0.6); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-      display: flex; align-items: center; justify-content: center;
-      opacity: 0; pointer-events: none;
-      transition: opacity 0.35s var(--ease);
+      background: rgba(10,10,10,0.6);
+      align-items: center; justify-content: center;
       padding: 20px;
+      display: none;
     }
-    .modal-overlay.active { opacity: 1; pointer-events: all; }
+    .modal-overlay.active { display: flex; }
     .modal {
       background: var(--white); border-radius: 20px;
       width: 100%; max-width: 600px; max-height: 90vh;
       box-shadow: 0 32px 80px rgba(10,10,10,0.25);
-      transform: translateY(20px) scale(0.97);
-      transition: transform 0.4s var(--ease);
       display: flex; flex-direction: column;
     }
-    .modal-overlay.active .modal { transform: translateY(0) scale(1); }
     .modal-header {
       padding: 20px 24px; display: flex; align-items: center; justify-content: space-between;
       border-bottom: 1px solid var(--cream-dark); flex-shrink: 0;
